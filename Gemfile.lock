@@ -23,6 +23,9 @@ GEM
     builder (3.0.4)
     coderay (1.0.9)
     daemons (1.1.9)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
     erubis (2.7.0)
     eventmachine (1.0.3)
     haml (4.0.3)
@@ -87,6 +90,8 @@ PLATFORMS
 
 DEPENDENCIES
   actionmailer
+  dotenv
+  dotenv-deployment
   mailcatcher
   pry
   sinatra

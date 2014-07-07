@@ -13,14 +13,15 @@ configure do
   set :allow_credentials, true
   set :allow_headers, settings.allow_headers + ['X-Requested-With']#, ["*", "Content-Type", "Accept", "AUTHORIZATION", "Cache-Control"]
 
-  if production?
+  if production? # => ENV['RACK_ENV'] == 'production'
     ActionMailer::Base.smtp_settings = {
-      :address => "smtp.sendgrid.net",
-      :port => '25',
-      :authentication => :plain,
-      :user_name => ENV['SENDGRID_USERNAME'],
-      :password => ENV['SENDGRID_PASSWORD'],
-      :domain => ENV['SENDGRID_DOMAIN'],
+      :user_name            => ENV['EVIL_CONTACT_SMTP_USER'],
+      :password             => ENV['EVIL_CONTACT_SMTP_PASSW'],
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :authentication       => :plain,
+      :domain               => 'gmail.com',
+      :enable_starttls_auto => true,
     }
   else
     ActionMailer::Base.smtp_settings = {
@@ -36,6 +37,13 @@ end
 
 
 #############################################################################################################
+get "/env" do
+  "#{ENV['RACK_ENV']} #{ENV['EVIL_CONTACT_SMTP_USER']}"
+end
+
+get "/" do
+  "<h1>It works!</h1>"
+end
 
 get '/debug' do
   extra = (params[:extra] || {}).merge( referer: request.referer)
