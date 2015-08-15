@@ -21,12 +21,12 @@ configure do
       :port                 => 587,
       :authentication       => :plain,
       :domain               => 'gmail.com',
-      :enable_starttls_auto => true,
+      :enable_starttls_auto => true
     }
   else
     ActionMailer::Base.smtp_settings = {
       :address => "localhost",
-      :port => '1025',
+      :port => '1025'
     }
   end
 
