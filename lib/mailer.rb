@@ -5,7 +5,7 @@ class Mailer < ActionMailer::Base
     @sender = sender
     @body   = body
     @extra  = extra
-    @cc     = ["pm@zeit.io", "sp@zeit.io"]
+    @cc     = ["your-mail@example.com", "your-second-mail@example.com"]
     mail(from: @sender, subject: "[ContactForm]", cc: @cc)
   end
 end
